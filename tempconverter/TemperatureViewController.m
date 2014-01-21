@@ -62,17 +62,31 @@
 - (void)updateCelsius {
     // takes the Fahrenheit value and converts it into
     // Celsius
-    float fahrenheitTemp = [self.fahrenheitTextField.text floatValue];
-    float celsiusTemp = (fahrenheitTemp - 32) * 5 / 9;
-    self.celsiusTextField.text = [NSString stringWithFormat:@"%0.1f", celsiusTemp];
+    if (![self.fahrenheitTextField.text isEqualToString:@""]) {
+        float fahrenheitTemp = [self.fahrenheitTextField.text floatValue];
+        float celsiusTemp = (fahrenheitTemp - 32) * 5 / 9;
+        self.celsiusTextField.text = [NSString stringWithFormat:@"%0.1f", celsiusTemp];
+    }
+    else {
+        // If no value was added, we need to make sure the
+        // fahrenheit value is still there
+        [self updateFahrenheit];
+    }
 }
 
 - (void)updateFahrenheit {
     // takes the Celsius value and converts it to
     // Fahrenheit
-    float celsiusTemp = [self.celsiusTextField.text floatValue];
-    float fahrenheitTemp = celsiusTemp * 9 / 5 + 32;
-    self.fahrenheitTextField.text = [NSString stringWithFormat:@"%0.1f", fahrenheitTemp];
+    if (![self.celsiusTextField.text isEqualToString:@""]) {
+        float celsiusTemp = [self.celsiusTextField.text floatValue];
+        float fahrenheitTemp = celsiusTemp * 9 / 5 + 32;
+        self.fahrenheitTextField.text = [NSString stringWithFormat:@"%0.1f", fahrenheitTemp];
+    }
+    else {
+        // If no value was added, we need to make sure the
+        // celsius value is still there
+        [self updateCelsius];
+    }
 }
 
 @end
